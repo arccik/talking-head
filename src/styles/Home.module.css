@@ -12,14 +12,45 @@
   box-shadow: inset 0 1px 4px hsla(0, 0%, 0%, 0.1),
     0 1px 2px hsla(0, 0%, 100%, 0.3);
 }
+.repeatButton {
+  border: 1px solid rgb(214, 214, 214);
+  font-size: larger;
+  padding: 15px;
+  border-radius: 33px;
+  background: linear-gradient(315deg, #f0f0f0, #cacaca);
+  box-shadow:  -1px -1px 10px #9f9f9f,
+             7px 7px 5px #ffffff;
+}
+.repeatButton:active {
+  border-radius: 50px;
+background: linear-gradient(315deg, #d6d6d6, #a5a5a5);
 
+}
 .speechIcon {
   font-weight: bolder;
   color: white;
   position: inherit;
   align-items: end;
+  display: block;
+  font-size: large;
 }
 
+.micIcon {
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow:  20px 20px 60px #bebebe,
+             -20px -20px 60px #ffffff;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border: none;
+}
+.micIcon:focus {
+  border: none;
+}
+.micIcon::selection {
+  border: none;
+}
 .inputField {
   min-width: 400px;
   height: 30px;
@@ -283,7 +314,15 @@
   .vercelLogo {
     filter: invert(1);
   }
+  .micIcon {
+    box-shadow: 5px 5px 10px #3a3a3a,
+    -5px -5px 10px #464646;
+    background: transparent;
+  }
+  .micIcon:active {
 
+    background: rgb(43, 43, 43);
+  }
   .logo,
   .thirteen img {
     filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
