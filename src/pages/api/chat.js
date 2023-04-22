@@ -8,7 +8,6 @@ export default async function handler(req, res) {
   });
   const openai = new OpenAIApi(configuration);
   const question = req.query.q;
-
   if (!question)
     return res.json({
       message: "Question is not provided, you need to do this dude !",
@@ -20,7 +19,7 @@ export default async function handler(req, res) {
     model: "text-davinci-003",
     prompt: promtOptions,
     temperature: 0,
-    max_tokens: 2000,
+    max_tokens: 1000,
     top_p: 1,
     frequency_penalty: 0.0,
     presence_penalty: 0.0,

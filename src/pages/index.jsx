@@ -15,8 +15,7 @@ export default function Home() {
 
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {
-      console.log("listening<<< ");
-      setQuestion(result);
+      console.log("listening<<< ", result);
       if (result.toLowerCase().includes("bob")) {
         setQuestion(result);
         handleQuestion();
@@ -25,6 +24,13 @@ export default function Home() {
       // handleQuestion();
     },
   });
+
+  useEffect(() => {
+    const url = `http://192.168.1.179:3000?text=${answers}`;
+    fetch(url)
+      .then((res) => console.log("response from motos ; ", res))
+      .catch((err) => console.log("motor sucks"));
+  }, [answers]);
 
   const onLongPress = () => {
     console.log("longpress is triggered, listening....");
@@ -36,11 +42,13 @@ export default function Home() {
   const handleQuestion = () => {
     setLoading(true);
     if (!question) return setError("Type your question"), setLoading(false);
+
     fetch(`/api/chat?q=${question}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Data <<< ", data);
         setAnswers(data.answer);
+
         handleSpeaking(data.answer);
       })
       .catch((e) => {
@@ -75,10 +83,12 @@ export default function Home() {
         {answers && (
           <div className={`${styles.message} ${styles.conic} `}>
             <>
-              <h4>{answers}</h4>
-              <i className={styles.speechIcon} onClick={handleSpeakButton}>
-                Ask Browser to say this
-              </i>
+              <h4>
+                {answers}
+                <i onClick={handleSpeakButton} style={{ marginLeft: 10 }}>
+                  🔊
+                </i>
+              </h4>
             </>
           </div>
         )}
